@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Floor Plan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 40px;
+    }
+    img {
+      max-width: 500px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    .dropdown {
+      margin: 20px;
+      font-size: 16px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Image -->
+  <img src="C:\Users\andre\Downloads\tilte.jpg" alt="Title Image">
+
+  <!-- Title -->
+  <h1>Floor Plan</h1>
+
+  <!-- Anchorage Section -->
+  <label for="floor">Anchorage:</label>
+  <select id="floor" class="dropdown" onchange="updateWingDropdown()">
+    <option value="">-- Select Floor --</option>
+    <option value="floor1">Floor 1</option>
+    <option value="floor2">Floor 2</option>
+    <option value="floor3">Floor 3</option>
+  </select>
+
+  <!-- Wing Dropdown -->
+  <select id="wing" class="dropdown">
+    <option value="">-- Select Wing --</option>
+  </select>
+
+  <!-- Output -->
+  <p id="selection"></p>
+
+  <script>
+    function updateWingDropdown() {
+      const wingDropdown = document.getElementById("wing");
+      wingDropdown.innerHTML = ""; // clear previous options
+
+      if (document.getElementById("floor").value !== "") {
+        const options = ["Wing A", "Wing B"];
+        options.forEach(wing => {
+          const option = document.createElement("option");
+          option.value = wing;
+          option.text = wing;
+          wingDropdown.appendChild(option);
+        });
+      }
+
+      // update selection text
+      document.getElementById("wing").addEventListener("change", () => {
+        const floor = document.getElementById("floor").value;
+        const wing = document.getElementById("wing").value;
+        document.getElementById("selection").innerText =
+          `You selected: ${floor} - ${wing}`;
+      });
+    }
+  </script>
+
+</body>
+</html>
